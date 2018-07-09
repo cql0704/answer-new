@@ -208,4 +208,16 @@
       options = #{options,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+  <select id="randomOneQuestion" resultMap="BaseResultMap">
+  	SELECT  id, content, type, options
+  	 FROM question  AS t1  JOIN 
+	(SELECT ROUND(RAND() * (
+	(SELECT MAX(id) FROM `question`)-(SELECT MIN(id) FROM question))
+	+(SELECT MIN(id) FROM question)) AS ranId) 
+	AS t2 WHERE t1.id >= t2.ranId ORDER BY t1.id LIMIT 1
+  </select>
+  
+  
 </mapper>

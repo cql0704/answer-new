@@ -15,6 +15,9 @@ public class FunConstant {
 	public final static String FAILED_NO = "-1";
 	/**接口调用成功*/
 	public final static String SUCCESS_No = "0";
-	
+	/**返回map*/
+	public final static String RESULT_MAP = "resultMap";
+	/**返回list*/
+	public final static String RESULT_LIST = "resultList";
 	
 }

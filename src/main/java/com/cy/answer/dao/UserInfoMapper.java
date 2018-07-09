@@ -34,4 +34,11 @@ public interface UserInfoMapper {
      * @return
      */
     UserInfo selectByWxId(String wxId);
+    
+    /**
+     * 插入用户数据返回用户id
+     * @param userInfo
+     * @return
+     */
+    int insertBackId(UserInfo userInfo);
 }

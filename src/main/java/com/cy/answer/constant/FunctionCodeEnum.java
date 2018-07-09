@@ -8,6 +8,7 @@ package com.cy.answer.constant;
 public enum FunctionCodeEnum {
 
 	FUN_ANSWER_0001("FUN-ANSWER-001","保持或更新用户信息"),
+	FUN_ANSWER_0002("FUN-ANSWER-002","随机出题"),
 	
 	;
 	//接口功能号

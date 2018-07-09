@@ -50,4 +50,12 @@ public class Question {
     public void setOptions(String options) {
         this.options = options == null ? null : options.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", content=" + content + ", answer=" + answer + ", type=" + type + ", options="
+				+ options + "]";
+	}
+    
+    
 }

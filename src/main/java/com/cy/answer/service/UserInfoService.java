@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cy.answer.constant.FunConstant;
 import com.cy.answer.dao.UserInfoMapper;
 import com.cy.answer.exception.BizException;
 import com.cy.answer.model.UserInfo;

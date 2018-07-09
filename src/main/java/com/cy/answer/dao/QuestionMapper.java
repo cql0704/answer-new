@@ -27,4 +27,10 @@ public interface QuestionMapper {
     int updateByPrimaryKeySelective(Question record);
 
     int updateByPrimaryKey(Question record);
+    
+    /**
+     * 从题库中随机选一题
+     * @return
+     */
+    Question randomOneQuestion();
 }
