@@ -1,28 +1,24 @@
 package answer.test;
 
-import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.cy.answer.controller.UserInfoController;
 import com.cy.answer.dao.UserInfoMapper;
-import com.cy.answer.model.UserInfo;
+import com.cy.answer.model.ResultModel;
 
 public class UserTest extends BaseJunit4Test{
 	
 	@Autowired
 	private UserInfoMapper userInfoMapper;
 	
+	@Autowired
+	private UserInfoController userInfoController;
+	
 	@Test
 	public void testSave() {
-		UserInfo userInfo = new UserInfo();
-		userInfo.setWxId("5");
-		userInfo.setHeadImage("5");
-		userInfo.setNickName("5");
-		userInfo.setRegistTime(new Date());
-		userInfo.setLastLoginTime(new Date());
-		int userId = userInfoMapper.insertBackId(userInfo);
-		System.out.println(userInfo.getUserId());
-		System.out.println("userId:"+userId);
+		ResultModel resultModel = userInfoController.saveOrUpdateUser("5", "5", "5");
+		System.out.println(resultModel);
 	}
 }

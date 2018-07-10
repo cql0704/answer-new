@@ -234,11 +234,11 @@
     where wx_id = #{wxId,jdbcType=VARCHAR}   
   </select>
   
-<insert id="insertBackId" parameterType="com.cy.answer.model.UserInfo" useGeneratedKeys="true" keyProperty="user_id">
-    insert into user_info (wx_id, head_image, 
+<insert id="insertBackId" parameterType="com.cy.answer.model.UserInfo" useGeneratedKeys="true" keyProperty="userId">
+    insert into user_info (user_id,wx_id, head_image, 
       nick_name, regist_time, last_login_time
       )
-    values (#{wxId,jdbcType=VARCHAR}, #{headImage,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=VARCHAR}, #{wxId,jdbcType=VARCHAR}, #{headImage,jdbcType=VARCHAR}, 
       #{nickName,jdbcType=VARCHAR}, #{registTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}
       )
   </insert>

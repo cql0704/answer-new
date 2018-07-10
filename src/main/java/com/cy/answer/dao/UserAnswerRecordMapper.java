@@ -27,4 +27,6 @@ public interface UserAnswerRecordMapper {
     int updateByPrimaryKeySelective(UserAnswerRecord record);
 
     int updateByPrimaryKey(UserAnswerRecord record);
+    
+    UserAnswerRecord selectByUserId (Integer userId);
 }

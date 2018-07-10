@@ -3,14 +3,15 @@ package com.cy.answer.model;
 import java.util.Date;
 
 public class UserAnswerRecord {
+	//主键id
     private Integer id;
-
+    //用户id
     private Integer userId;
-
+    //答题总数
     private Integer answerAmount;
-
+    //正确数量
     private Integer rightAmount;
-
+    //更新时间
     private Date updateTime;
 
     public Integer getId() {
