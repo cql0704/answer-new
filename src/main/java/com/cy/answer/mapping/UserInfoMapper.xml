@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.answer.dao.UserInfoDao">
+  <resultMap id="BaseResultMap" type="com.cy.answer.model.UserInfo">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="wx_id" jdbcType="VARCHAR" property="wxId" />
+    <result column="head_image" jdbcType="VARCHAR" property="headImage" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="regist_time" jdbcType="TIMESTAMP" property="registTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, wx_id, head_image, nick_name, regist_time, last_login_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cy.answer.model.UserInfo">
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_info (wx_id, head_image, nick_name, 
+      regist_time, last_login_time)
+    values (#{wxId,jdbcType=VARCHAR}, #{headImage,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{registTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cy.answer.model.UserInfo">
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wxId != null">
+        wx_id,
+      </if>
+      <if test="headImage != null">
+        head_image,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="registTime != null">
+        regist_time,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wxId != null">
+        #{wxId,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null">
+        #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="registTime != null">
+        #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cy.answer.model.UserInfo">
+    update user_info
+    <set>
+      <if test="wxId != null">
+        wx_id = #{wxId,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null">
+        head_image = #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="registTime != null">
+        regist_time = #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cy.answer.model.UserInfo">
+    update user_info
+    set wx_id = #{wxId,jdbcType=VARCHAR},
+      head_image = #{headImage,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      regist_time = #{registTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  
+  
+    <!-- 根据根据微信查找用户信息 -->
+  <select id="selectByWxId" resultMap="BaseResultMap" parameterType="com.cy.answer.model.UserInfo">   
+   select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where wx_id = #{wxId,jdbcType=VARCHAR}   
+  </select>
+</mapper>

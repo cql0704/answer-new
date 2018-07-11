@@ -3,6 +3,7 @@ package com.cy.answer.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cy.answer.constant.FunConstant;
@@ -61,11 +62,16 @@ public class QuestionController {
 	 * @param answer          问题答案
 	 * @return
 	 */
-	public ResultModel checkAnswer (int userId, int questionId, String answer) {
+	@ResponseBody
+	@RequestMapping("FUN-ANSWER-003")
+	public ResultModel checkAnswer (
+			@RequestParam(value="userId", defaultValue="0") int userId, 
+			@RequestParam(value="questionId", defaultValue="0") int questionId, 
+			String answer) {
 		ResultModel resultModel = new ResultModel();		
 		try {
 			boolean resultFlag = questionService.checkAnswer(userId, questionId, answer);
-			//1为正确  0
+			//1为正确  0为错误
 			resultModel.getResultMap().put("answerResult", resultFlag==true ? TypeConstant.ANSWER_RESULT_SUCCESS:TypeConstant.ANSWER_RESULT_FAILED);
 		} catch (BizException e) {
 			resultModel.setResultNo(FunConstant.FAILED_NO);

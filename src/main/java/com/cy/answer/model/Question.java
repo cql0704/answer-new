@@ -1,5 +1,7 @@
 package com.cy.answer.model;
 
+import java.util.Date;
+
 public class Question {
     private Integer id;
 
@@ -10,6 +12,8 @@ public class Question {
     private String type;
 
     private String options;
+
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -51,11 +55,11 @@ public class Question {
         this.options = options == null ? null : options.trim();
     }
 
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", content=" + content + ", answer=" + answer + ", type=" + type + ", options="
-				+ options + "]";
-	}
-    
-    
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }

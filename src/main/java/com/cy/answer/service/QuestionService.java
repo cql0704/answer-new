@@ -1,16 +1,18 @@
 package com.cy.answer.service;
 
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cy.answer.constant.TypeConstant;
-import com.cy.answer.dao.QuestionMapper;
-import com.cy.answer.dao.UserAnswerLogMapper;
-import com.cy.answer.dao.UserAnswerRecordMapper;
-import com.cy.answer.dao.UserInfoMapper;
+import com.cy.answer.dao.QuestionDao;
+import com.cy.answer.dao.UserAnswerLogDao;
+import com.cy.answer.dao.UserAnswerRecordDao;
+import com.cy.answer.dao.UserInfoDao;
 import com.cy.answer.exception.BizException;
 import com.cy.answer.model.Question;
 import com.cy.answer.model.UserAnswerLog;
@@ -22,13 +24,13 @@ import com.cy.answer.model.UserInfo;
 public class QuestionService {
 	
 	@Autowired
-	private QuestionMapper questionDao;
+	private QuestionDao questionDao;
 	@Autowired
-	private UserInfoMapper userInfoDao;
+	private UserInfoDao userInfoDao;
 	@Autowired
-	private UserAnswerLogMapper userAnswerLogDao;
+	private UserAnswerLogDao userAnswerLogDao;
 	@Autowired
-	private UserAnswerRecordMapper userAnswerRecordDao;
+	private UserAnswerRecordDao userAnswerRecordDao;
 	
 	/**
 	 * 随机出题
@@ -76,6 +78,9 @@ public class QuestionService {
 		UserAnswerLog userAnswerLog = new UserAnswerLog();
 		userAnswerLog.setUserId(userId);
 		userAnswerLog.setQuestionId(questionId);
+		userAnswerLog.setCreateTime(new Date());
+		userAnswerLog.setUserAnswer(answer);
+		
 		//校验答案
 		//回答正确
 		if(answer.equals(question.getAnswer())) {
@@ -96,8 +101,11 @@ public class QuestionService {
 		}
 		
 		//更新用户答题记录
+		userAnswerRecord.setUserId(userId);
+		userAnswerRecord.setUpdateTime(new Date());
 		//用户答题总数增加一条
-		userAnswerRecord.setAnswerAmount(userAnswerRecord.getAnswerAmount() + 1);
+		userAnswerRecord.setAmount(userAnswerRecord.getAmount() + 1);
+		
 		int updateLen = userAnswerRecordDao.updateByPrimaryKey(userAnswerRecord);
 		if( 1 != updateLen ) {
 			throw new BizException("更新用户答题流水失败");

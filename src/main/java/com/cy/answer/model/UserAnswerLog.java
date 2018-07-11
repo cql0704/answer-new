@@ -13,6 +13,8 @@ public class UserAnswerLog {
 
     private Date createTime;
 
+    private String userAnswer;
+
     public Integer getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class UserAnswerLog {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer == null ? null : userAnswer.trim();
     }
 }

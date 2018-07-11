@@ -8,39 +8,21 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cy.answer.dao.UserAnswerRecordMapper;
-import com.cy.answer.dao.UserInfoMapper;
+import com.cy.answer.dao.UserAnswerRecordDao;
+import com.cy.answer.dao.UserInfoDao;
 import com.cy.answer.exception.BizException;
 import com.cy.answer.model.UserAnswerRecord;
 import com.cy.answer.model.UserInfo;
-import com.cy.answer.model.UserInfoExample;
-import com.cy.answer.model.UserInfoExample.Criteria;
+
 
 @Service
 public class UserInfoService {
 	
 	@Autowired
-	private UserInfoMapper userInfoDao;
+	private UserInfoDao userInfoDao;
 	@Autowired
-	private UserAnswerRecordMapper userAnswerRecordDao;
+	private UserAnswerRecordDao userAnswerRecordDao;
 	
-	/**
-	 * 根据微信id查找用户，只有当查找到一条记录时才返回
-	 * @param wxId
-	 * @return
-	 */
-	public UserInfo findByWxId(String wxId) {
-		UserInfoExample userInfoExample = new UserInfoExample();
-		Criteria criteria = userInfoExample.createCriteria();
-		criteria.andWxIdEqualTo(wxId);
-		List<UserInfo> list = userInfoDao.selectByExample(userInfoExample);
-		
-		if (list != null && list.size() == 1) {
-			return list.get(0);
-		} else {
-			return null;
-		}		
-	}
 	
 	/**
 	 * 保存或更新用户信息
@@ -66,7 +48,7 @@ public class UserInfoService {
 			userInfo.setNickName(nickName);
 			userInfo.setRegistTime(new Date());
 			userInfo.setLastLoginTime(new Date());
-			int len = userInfoDao.insertBackId(userInfo);
+			int len = userInfoDao.insert(userInfo);
 			//用户信息保存失败
 			if (1 != len ) {
 				throw new BizException("保存用户信息失败");
