@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -113,4 +114,36 @@ public class QuestionService {
 		
 		return resultFlag;
 	}
+	
+	
+	/**
+	 * 添加题目
+	 * @param content     题目内容
+	 * @param answer      题目答案
+	 * @param type        题目类型
+	 * @param options     题目选项
+	 * @throws BizException 
+	 */
+	public void addQuestion(String content, String answer, String type, String options) throws BizException {
+		//参数校验
+		if( StringUtils.isEmpty( content.trim() ) || StringUtils.isEmpty( answer.trim() ) ||	
+			StringUtils.isEmpty( options.trim() ) 
+		) {
+			throw new BizException("参数错误");
+		}
+		
+		Question question = new Question();
+		question.setContent(content);
+		question.setOptions(options);
+		question.setAnswer(answer);
+		question.setType(type);
+		question.setCreateTime(new Date());
+		
+		int len = questionDao.insert(question);
+		if( 1 != len ) {
+			throw new BizException("添加题目失败");
+		}
+			
+	}
+		
 }

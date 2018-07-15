@@ -3,16 +3,17 @@ package com.cy.answer.model;
 import java.util.Date;
 
 public class Question {
+	//题目id
     private Integer id;
-
+    //题目内容
     private String content;
-
+    //答案
     private String answer;
-
+    //题目类型
     private String type;
-
+    //选项
     private String options;
-
+    //创建时间
     private Date createTime;
 
     public Integer getId() {

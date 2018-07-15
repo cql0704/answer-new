@@ -7,7 +7,7 @@ public class UserAnswerRecordTest extends BaseJunit4Test{
 	
 
 	
-	@Test
+
 	public void testRecord(){
 
 		

@@ -86,8 +86,17 @@ public class QuestionController {
 	}
 	
 	
-	
-	public ResultModel addQuestion () {
+	/**
+	 * 添加题目
+	 * @param content      题目内容
+	 * @param answer      题目答案
+	 * @param type        题目类型
+	 * @param options     题目选项
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("FUN-ANSWER-004")
+	public ResultModel addQuestion (String content, String answer, String type, String options) {
 		ResultModel resultModel = new ResultModel();
 		try {
 			

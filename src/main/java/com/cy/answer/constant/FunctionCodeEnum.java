@@ -10,6 +10,7 @@ public enum FunctionCodeEnum {
 	FUN_ANSWER_0001("FUN-ANSWER-001","保持或更新用户信息"),
 	FUN_ANSWER_0002("FUN-ANSWER-002","随机出题"),
 	FUN_ANSWER_0003("FUN-ANSWER-003","校验答案"),
+	FUN_ANSWER_0004("FUN-ANSWER-004","添加题目"),
 	
 	;
 	//接口功能号
